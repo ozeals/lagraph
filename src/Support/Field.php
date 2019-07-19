@@ -176,7 +176,7 @@ abstract class Field extends Fluent
             }
 
             // Authorize
-            if (call_user_func($authorize, $arguments[1]) != true) {
+            if (call_user_func_array($authorize, [$arguments[1],$arguments[2]] ) != true) {
                 throw new AuthorizationError('Unauthorized');
             }
 
