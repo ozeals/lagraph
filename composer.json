@@ -1,6 +1,6 @@
 {
-    "name": "rebing/graphql-laravel",
-    "description": "Laravel wrapper for PHP GraphQL",
+    "name": "ozeals/lagraph",
+    "description": "Laravel GraphQL",
     "keywords": ["framework", "laravel", "graphql", "react"],
     "authors": [
         {
