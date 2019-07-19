@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use GraphQL\Language\AST\FieldNode;
@@ -77,7 +75,7 @@ class ResolveInfoFieldsAndArguments
      * @return array
      * @see \GraphQL\Type\Definition\ResolveInfo::getFieldSelection
      */
-    public function getFieldsAndArgumentsSelection(int $depth = 0): array
+    public function getFieldsAndArgumentsSelection(int $depth = 0)
     {
         $fields = [];
 
@@ -98,7 +96,7 @@ class ResolveInfoFieldsAndArguments
      * @return array
      * @see \GraphQL\Type\Definition\ResolveInfo::foldSelectionSet
      */
-    private function foldSelectionSet(SelectionSetNode $selectionSet, int $descend): array
+    private function foldSelectionSet(SelectionSetNode $selectionSet, int $descend)
     {
         $fields = [];
 

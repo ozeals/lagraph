@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use Closure;
@@ -47,7 +45,7 @@ class SelectFields
         $this->relations = $fields[1];
     }
 
-    private function getFieldSelection(ResolveInfo $resolveInfo, array $args, int $depth): array
+    private function getFieldSelection(ResolveInfo $resolveInfo, array $args, int $depth)
     {
         $resolveInfoFieldsAndArguments = new ResolveInfoFieldsAndArguments($resolveInfo);
 
@@ -115,7 +113,7 @@ class SelectFields
      * @param  array  $select Passed by reference, adds further fields to select
      * @param  array  $with Passed by reference, adds further relations
      */
-    protected static function handleFields(array $queryArgs, array $requestedFields, GraphqlType $parentType, array &$select, array &$with): void
+    protected static function handleFields(array $queryArgs, array $requestedFields, GraphqlType $parentType, array &$select, array &$with)
     {
         $parentTable = self::isMongodbInstance($parentType) ? null : self::getTableNameFromParentType($parentType);
 
@@ -248,7 +246,7 @@ class SelectFields
      *                   `false` if not selectable, but allowed
      *                   `null`  if not allowed
      */
-    protected static function validateField(FieldDefinition $fieldObject, array $queryArgs): ?bool
+    protected static function validateField(FieldDefinition $fieldObject, array $queryArgs)
     {
         $selectable = true;
 
@@ -295,7 +293,7 @@ class SelectFields
      *
      * @return bool
      */
-    private static function isQueryable(array $fieldObject): bool
+    private static function isQueryable(array $fieldObject)
     {
         return Arr::get($fieldObject, 'is_relation', true) === true;
     }
@@ -308,7 +306,7 @@ class SelectFields
      * @param  string|null  $parentTable
      * @param  bool  $forRelation
      */
-    protected static function addAlwaysFields(FieldDefinition $fieldObject, array &$select, ?string $parentTable, bool $forRelation = false): void
+    protected static function addAlwaysFields(FieldDefinition $fieldObject, array &$select, ?string $parentTable, bool $forRelation = false)
     {
         if (isset($fieldObject->config['always'])) {
             $always = $fieldObject->config['always'];
@@ -330,7 +328,7 @@ class SelectFields
      * @param  string|null  $parentTable
      * @param  bool  $forRelation
      */
-    protected static function addFieldToSelect($field, array &$select, ?string $parentTable, bool $forRelation): void
+    protected static function addFieldToSelect($field, array &$select, ?string $parentTable, bool $forRelation)
     {
         if ($field instanceof Expression) {
             $select[] = $field;
@@ -351,29 +349,29 @@ class SelectFields
         }
     }
 
-    private static function getPrimaryKeyFromParentType(GraphqlType $parentType): ?string
+    private static function getPrimaryKeyFromParentType(GraphqlType $parentType)
     {
         return isset($parentType->config['model']) ? app($parentType->config['model'])->getKeyName() : null;
     }
 
-    private static function getTableNameFromParentType(GraphqlType $parentType): ?string
+    private static function getTableNameFromParentType(GraphqlType $parentType)
     {
         return isset($parentType->config['model']) ? app($parentType->config['model'])->getTable() : null;
     }
 
-    private static function isMongodbInstance(GraphqlType $parentType): bool
+    private static function isMongodbInstance(GraphqlType $parentType)
     {
         $mongoType = 'Jenssegers\Mongodb\Eloquent\Model';
 
         return isset($parentType->config['model']) ? app($parentType->config['model']) instanceof $mongoType : false;
     }
 
-    public function getSelect(): array
+    public function getSelect()
     {
         return $this->select;
     }
 
-    public function getRelations(): array
+    public function getRelations()
     {
         return $this->relations;
     }

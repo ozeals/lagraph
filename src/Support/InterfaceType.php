@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use Closure;
@@ -10,7 +8,12 @@ use GraphQL\Type\Definition\InterfaceType as BaseInterfaceType;
 
 abstract class InterfaceType extends Type
 {
-    protected function getTypeResolver(): ?Closure
+    /**
+	 *  Get type Resolver
+	 *
+     * @return ?Closure
+     */
+    protected function getTypeResolver()
     {
         if (! method_exists($this, 'resolveType')) {
             return null;
@@ -42,7 +45,12 @@ abstract class InterfaceType extends Type
         return $attributes;
     }
 
-    public function toType(): GraphqlType
+    /**
+	 *  Convert to GraphqlType
+	 *
+     * @return GraphqlType
+     */
+    public function toType()
     {
         return new BaseInterfaceType($this->toArray());
     }

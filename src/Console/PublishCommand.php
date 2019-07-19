@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Console;
 
 use Illuminate\Console\Command;
@@ -49,7 +47,7 @@ class PublishCommand extends Command
         ];
     }
 
-    public function handle(): void
+    public function handle()
     {
         foreach ($this->fileMap as $from => $to) {
             if ($this->files->exists($to) && ! $this->option('force')) {
@@ -68,7 +66,7 @@ class PublishCommand extends Command
      *
      * @return void
      */
-    protected function createParentDirectory(string $directory): void
+    protected function createParentDirectory(string $directory)
     {
         if (! $this->files->isDirectory($directory)) {
             $this->files->makeDirectory($directory, 0755, true);
@@ -83,7 +81,7 @@ class PublishCommand extends Command
      *
      * @return void
      */
-    protected function status(string $from, string $to): void
+    protected function status(string $from, string $to)
     {
         $from = str_replace(base_path(), '', realpath($from));
         $to = str_replace(base_path(), '', realpath($to));

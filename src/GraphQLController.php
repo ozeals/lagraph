@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL;
 
 use Exception;
@@ -22,7 +20,7 @@ class GraphQLController extends Controller
         $this->app = $app;
     }
 
-    public function query(Request $request, string $schema = null): JsonResponse
+    public function query(Request $request, string $schema = null)
     {
         $middleware = new GraphQLUploadMiddleware();
         $request = $middleware->processRequest($request);
@@ -57,7 +55,7 @@ class GraphQLController extends Controller
         return response()->json($data, 200, $headers, $jsonOptions);
     }
 
-    protected function executeQuery(string $schema, array $input): array
+    protected function executeQuery(string $schema, array $input)
     {
         $query = $input['query'];
 
@@ -87,7 +85,7 @@ class GraphQLController extends Controller
         }
     }
 
-    public function graphiql(Request $request, string $schema = null): View
+    public function graphiql(Request $request, string $schema = null)
     {
         $graphqlPath = '/'.config('graphql.prefix');
         if ($schema) {
@@ -106,7 +104,7 @@ class GraphQLController extends Controller
      * @param  Request  $request
      * @return array<string,string>
      */
-    protected function getRouteParameters(Request $request): array
+    protected function getRouteParameters(Request $request)
     {
         if (Helpers::isLumen()) {
             $route = $request->route();

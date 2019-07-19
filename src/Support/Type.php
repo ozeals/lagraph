@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use Illuminate\Support\Str;
@@ -18,6 +16,7 @@ use Rebing\GraphQL\Support\Contracts\TypeConvertible;
 abstract class Type implements TypeConvertible
 {
     protected $attributes = [];
+
     /**
      * Set to `true` in your type when it should reflect an InputObject.
      * @var bool
@@ -25,6 +24,7 @@ abstract class Type implements TypeConvertible
      * @see InputType
      */
     protected $inputObject = false;
+
     /**
      * Set to `true` in your type when it should reflect an Enum.
      * @var bool
@@ -33,7 +33,7 @@ abstract class Type implements TypeConvertible
      */
     protected $enumObject = false;
 
-    public function attributes(): array
+    public function attributes()
     {
         return [];
     }
@@ -41,17 +41,23 @@ abstract class Type implements TypeConvertible
     /**
      * @return array<string,array|string|FieldDefinition>
      */
-    public function fields(): array
+    public function fields()
     {
         return [];
     }
 
-    public function interfaces(): array
+    public function interfaces()
     {
         return [];
     }
 
-    protected function getFieldResolver(string $name, array $field): ?callable
+	
+    /**
+	 * Get field resovle
+	 *
+     * @return callable|null
+     */
+    protected function getFieldResolver(string $name, array $field)
     {
         if (isset($field['resolve'])) {
             return $field['resolve'];
@@ -80,7 +86,12 @@ abstract class Type implements TypeConvertible
         return null;
     }
 
-    public function getFields(): array
+    /**
+	 * Get fields
+	 *
+     * @return array
+     */
+    public function getFields()
     {
         $fields = $this->fields();
         $allFields = [];
@@ -136,7 +147,12 @@ abstract class Type implements TypeConvertible
         return $this->getAttributes();
     }
 
-    public function toType(): GraphqlType
+    /**
+	 *  Convert to GraphqlType
+	 *
+     * @return GraphqlType
+     */
+    public function toType()
     {
         if ($this->inputObject) {
             return new InputObjectType($this->toArray());
@@ -176,7 +192,12 @@ abstract class Type implements TypeConvertible
         return isset($attributes[$key]);
     }
 
-    public function __set(string $key, $value): void
+    /**
+	 * Setter
+	 *
+     * @return viod
+     */
+    public function __set(string $key, $value)
     {
         $this->attributes[$key] = $value;
     }

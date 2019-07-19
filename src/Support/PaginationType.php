@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use Illuminate\Support\Collection;
@@ -24,7 +22,7 @@ class PaginationType extends ObjectType
         parent::__construct($config);
     }
 
-    protected function getPaginationFields(string $typeName): array
+    protected function getPaginationFields(string $typeName)
     {
         return [
             'data' => [

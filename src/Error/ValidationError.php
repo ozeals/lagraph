@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Error;
 
 use GraphQL\Error\Error;
@@ -20,12 +18,12 @@ class ValidationError extends Error
         $this->validator = $validator;
     }
 
-    public function getValidatorMessages(): MessageBag
+    public function getValidatorMessages()
     {
         return $this->validator->errors();
     }
 
-    public function getValidator(): Validator
+    public function getValidator()
     {
         return $this->validator;
     }

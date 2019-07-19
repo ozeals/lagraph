@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL;
 
 use GraphQL\Validator\Rules\QueryDepth;
@@ -27,7 +25,7 @@ class GraphQLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(): void
+    public function boot()
     {
         $this->bootPublishes();
 
@@ -43,7 +41,7 @@ class GraphQLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function bootRouter(): void
+    protected function bootRouter()
     {
         if (config('graphql.routes')) {
             include __DIR__.'/routes.php';
@@ -55,7 +53,7 @@ class GraphQLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function bootPublishes(): void
+    protected function bootPublishes()
     {
         $configPath = __DIR__.'/../config';
 
@@ -74,7 +72,7 @@ class GraphQLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function bootTypes(): void
+    protected function bootTypes()
     {
         $configTypes = config('graphql.types');
         $this->app->make('graphql')->addTypes($configTypes);
@@ -85,7 +83,7 @@ class GraphQLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function bootSchemas(): void
+    protected function bootSchemas()
     {
         $configSchemas = config('graphql.schemas');
         foreach ($configSchemas as $name => $schema) {
@@ -98,7 +96,7 @@ class GraphQLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function applySecurityRules(): void
+    protected function applySecurityRules()
     {
         $maxQueryComplexity = config('graphql.security.query_max_complexity');
         if ($maxQueryComplexity !== null) {
@@ -136,7 +134,7 @@ class GraphQLServiceProvider extends ServiceProvider
         }
     }
 
-    public function registerGraphQL(): void
+    public function registerGraphQL()
     {
         $this->app->singleton('graphql', function (Container $app): GraphQL {
             $graphql = new GraphQL($app);
@@ -152,7 +150,7 @@ class GraphQLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function registerConsole(): void
+    public function registerConsole()
     {
         $this->commands(EnumMakeCommand::class);
         $this->commands(FieldMakeCommand::class);

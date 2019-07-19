@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 abstract class Privacy
 {
-    public function fire(): bool
+    public function fire()
     {
         return $this->validate(func_get_args()[0]);
     }
@@ -16,5 +14,5 @@ abstract class Privacy
      * @return bool Return `true` to allow access to the field in question,
      *   `false otherwise
      */
-    abstract public function validate(array $queryArgs): bool;
+    abstract public function validate(array $queryArgs);
 }

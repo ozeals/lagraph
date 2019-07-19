@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use GraphQL\Error\Error;
@@ -54,7 +52,7 @@ class UploadType extends ScalarType implements TypeConvertible
         throw new Error('`Upload` cannot be hardcoded in query, be sure to conform to GraphQL multipart request specification. Instead got: '.$valueNode->kind, [$valueNode]);
     }
 
-    public function toType(): Type
+    public function toType()
     {
         return new static();
     }

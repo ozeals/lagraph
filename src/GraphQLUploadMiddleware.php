@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL;
 
 use Closure;
@@ -34,7 +32,7 @@ class GraphQLUploadMiddleware
      *
      * @return \Illuminate\Http\Request
      */
-    public function processRequest(Request $request): Request
+    public function processRequest(Request $request)
     {
         $contentType = $request->header('content-type') ?: '';
 
@@ -53,7 +51,7 @@ class GraphQLUploadMiddleware
      *
      * @return \Illuminate\Http\Request
      */
-    private function parseUploadedFiles(Request $request): Request
+    private function parseUploadedFiles(Request $request)
     {
         $bodyParams = $request->all();
         if (! isset($bodyParams['map'])) {
@@ -92,7 +90,7 @@ class GraphQLUploadMiddleware
      * @param \Illuminate\Http\Request $request
      * @return void
      */
-    private function validateParsedBody(Request $request): void
+    private function validateParsedBody(Request $request)
     {
         $bodyParams = $request->all();
 

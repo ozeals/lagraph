@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use GraphQL\Type\Definition\Type as GraphqlType;
@@ -9,7 +7,12 @@ use GraphQL\Type\Definition\EnumType as GraphqlEnumType;
 
 abstract class EnumType extends Type
 {
-    public function toType(): GraphqlType
+    /**
+	 *  Convert to GraphqlType
+	 *
+     * @return GraphqlType
+     */
+    public function toType()
     {
         return new GraphqlEnumType($this->toArray());
     }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Console;
 
 use Illuminate\Console\GeneratorCommand;
@@ -29,7 +27,7 @@ class EnumMakeCommand extends GeneratorCommand
         return $this->replaceGraphqlName($stub);
     }
 
-    protected function replaceGraphqlName(string $stub): string
+    protected function replaceGraphqlName(string $stub)
     {
         $graphqlName = $this->getNameInput();
         $graphqlName = preg_replace('/Type$/', '', $graphqlName);

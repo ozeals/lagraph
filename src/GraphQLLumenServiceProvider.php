@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL;
 
 use Rebing\GraphQL\Console\PublishCommand;
 
 class GraphQLLumenServiceProvider extends GraphQLServiceProvider
 {
-    protected function bootPublishes(): void
+    protected function bootPublishes()
     {
         $configPath = __DIR__.'/../config';
 
@@ -27,7 +25,7 @@ class GraphQLLumenServiceProvider extends GraphQLServiceProvider
         parent::register();
     }
 
-    public function registerConsole(): void
+    public function registerConsole()
     {
         parent::registerConsole();
 

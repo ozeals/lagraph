@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use Illuminate\Support\Arr;
 use Rebing\GraphQL\Helpers;
 use Rebing\GraphQL\GraphQLController;
@@ -11,7 +9,7 @@ $router = app('router');
 $router->group(array_merge([
     'prefix'        => config('graphql.prefix'),
     'middleware'    => config('graphql.middleware', []),
-], config('graphql.route_group_attributes', [])), function ($router): void {
+], config('graphql.route_group_attributes', [])), function ($router) {
     /** @var \Illuminate\Routing\Router|\Laravel\Lumen\Routing\Router $router */
     // Routes
     $routes = config('graphql.routes');

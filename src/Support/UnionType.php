@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use GraphQL\Type\Definition\Type as GraphqlType;
@@ -10,9 +8,9 @@ use GraphQL\Type\Definition\UnionType as BaseUnionType;
 abstract class UnionType extends Type
 {
     /**
-     * @return GraphqlType[]
+     * @return array
      */
-    abstract public function types(): array;
+    abstract public function types();
 
     /**
      * Get the attributes from the container.
@@ -35,7 +33,12 @@ abstract class UnionType extends Type
         return $attributes;
     }
 
-    public function toType(): GraphqlType
+    /**
+	 *  Convert to GraphqlType
+	 *
+     * @return GraphqlType
+     */
+    public function toType()
     {
         return new BaseUnionType($this->toArray());
     }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Rebing\GraphQL\Support;
 
 use Closure;
@@ -22,12 +20,17 @@ abstract class Field extends Fluent
      * Override this in your queries or mutations
      * to provide custom authorization.
      */
-    public function authorize(array $args): bool
+    public function authorize(array $args)
     {
         return true;
     }
 
-    public function attributes(): array
+    /**
+	 *  Get field attributes
+	 *
+     * @return array
+     */
+    public function attributes():
     {
         return [];
     }
@@ -37,7 +40,7 @@ abstract class Field extends Fluent
     /**
      * @return array<string,array>
      */
-    public function args(): array
+    public function args()
     {
         return [];
     }
@@ -49,12 +52,12 @@ abstract class Field extends Fluent
      *
      * @return array
      */
-    public function validationErrorMessages(array $args = []): array
+    public function validationErrorMessages(array $args = [])
     {
         return [];
     }
 
-    protected function rules(array $args = []): array
+    protected function rules(array $args = [])
     {
         return [];
     }
@@ -123,7 +126,7 @@ abstract class Field extends Fluent
         return $rules;
     }
 
-    public function getInputTypeRules(InputObjectType $input, string $prefix, array $resolutionArguments): array
+    public function getInputTypeRules(InputObjectType $input, string $prefix, array $resolutionArguments)
     {
         $rules = [];
 
@@ -150,7 +153,12 @@ abstract class Field extends Fluent
         return $rules;
     }
 
-    protected function getResolver(): ?Closure
+	/*
+	 * Get Resolver
+	 *
+	 * @return ?Closure 
+	 */
+    protected function getResolver()
     {
         if (! method_exists($this, 'resolve')) {
             return null;
