@@ -16,6 +16,8 @@ use GraphQL\Type\Definition\Type as GraphqlType;
 
 abstract class Field extends Fluent
 {
+    abstract public function type();
+
     /**
      * Override this in your queries or mutations
      * to provide custom authorization.
@@ -30,12 +32,10 @@ abstract class Field extends Fluent
 	 *
      * @return array
      */
-    public function attributes():
+    public function attributes()
     {
         return [];
     }
-
-    abstract public function type(): GraphqlType;
 
     /**
      * @return array<string,array>
@@ -62,7 +62,7 @@ abstract class Field extends Fluent
         return [];
     }
 
-    public function getRules(): array
+    public function getRules()
     {
         $arguments = func_get_args();
 
@@ -96,7 +96,7 @@ abstract class Field extends Fluent
         return $rules;
     }
 
-    public function inferRulesFromType(GraphqlType $type, string $prefix, array $resolutionArguments): array
+    public function inferRulesFromType(GraphqlType $type, string $prefix, array $resolutionArguments)
     {
         $rules = [];
 
